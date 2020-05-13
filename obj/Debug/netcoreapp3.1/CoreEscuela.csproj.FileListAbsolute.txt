@@ -1,0 +1,13 @@
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.exe
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.deps.json
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.runtimeconfig.json
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.runtimeconfig.dev.json
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.dll
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\bin\Debug\netcoreapp3.1\CoreEscuela.pdb
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.csprojAssemblyReference.cache
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.csproj.CoreCompileInputs.cache
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.AssemblyInfoInputs.cache
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.AssemblyInfo.cs
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.dll
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.pdb
+F:\Users\asus\Desktop\CURSOS\PLATZI\FUNDAMENTOS DE C# CON NET CORE\CoreEscuela\obj\Debug\netcoreapp3.1\CoreEscuela.genruntimeconfig.cache
