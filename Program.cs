@@ -17,15 +17,14 @@ namespace CoreEscuela
             // Printer.Beep();
             ImprimirCursosEscuela(engine.Escuela);
 
-            // var obj = new ObjetoEscuelaBase();
-            var listaObjetos = engine.GetObjetosEscuela();
-
-            var listaILugar = from obj in listaObjetos
-                              where obj is ILugar
-                              select (ILugar)obj;
-
-            // engine.Escuela.LimpiarLugar();
-
+            //int dummy = 0;
+            var listaObjetos = engine.GetObjetosEscuela(
+                out int conteoEvaluaciones,
+                out int conteoAlumnos,
+                out int conteoAsignaturas,
+                out int conteoCursos
+                //out dummy --> se usa para colocar algún parámetro de salida que no se quiera tener en cuenta
+            );
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)
