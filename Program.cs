@@ -16,15 +16,6 @@ namespace CoreEscuela
             Printer.WriteTitle("BIENVENIDOS A LA ESCUELA");
             // Printer.Beep();
             ImprimirCursosEscuela(engine.Escuela);
-
-            //int dummy = 0;
-            var listaObjetos = engine.GetObjetosEscuela(
-                out int conteoEvaluaciones,
-                out int conteoAlumnos,
-                out int conteoAsignaturas,
-                out int conteoCursos
-                //out dummy --> se usa para colocar algún parámetro de salida que no se quiera tener en cuenta
-            );
         }
 
         private static void ImprimirCursosEscuela(Escuela escuela)
