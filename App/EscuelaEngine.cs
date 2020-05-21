@@ -25,26 +25,38 @@ namespace CoreEscuela
 
         public void ImprimirDiccionario(Dictionary<LlaveDiccionario, IEnumerable<ObjetoEscuelaBase>> dic, bool imprimirEval = false)
         {
-            foreach (var obj in dic)
+            foreach (var objdic in dic)
             {
-                Console.WriteLine(obj);
+                // Console.WriteLine(objdic);
 
-                Printer.WriteTitle(obj.Key.ToString());
+                Printer.WriteTitle(objdic.Key.ToString());
 
-                foreach (var val in obj.Value)
+                foreach (var val in objdic.Value)
                 {
-                    if (val is Evaluación)
+                    switch (objdic.Key)
                     {
-                        if (imprimirEval)
+                        case LlaveDiccionario.Evaluación:
+                            if (imprimirEval)
+                                Console.WriteLine(val);
+                            break;
+                        case LlaveDiccionario.Escuela:
+                            Console.WriteLine("Escuela: " + val);
+                            break;
+                        case LlaveDiccionario.Alumno:
+                            Console.WriteLine("Alumno: " + val.Nombre);
+                            break;
+                        case LlaveDiccionario.Curso:
+                            var cursotmp = val as Curso;
+                            if (cursotmp != null)
+                            {
+                                int countAlumnos = cursotmp.Alumnos.Count;
+                                Console.WriteLine("Curso: " + val.Nombre + " Cantidad Alumnos: " + countAlumnos);
+                            }
+                            break;
+                        default:
                             Console.WriteLine(val);
+                            break;
                     }
-                    else if (val is Escuela)
-                        Console.WriteLine("Escuela: " + val);
-                    else if (val is Alumno)
-                        Console.WriteLine("Alumno: " + val.Nombre);
-                    else
-                        Console.WriteLine(val);
-
                 }
             }
         }
@@ -165,13 +177,13 @@ namespace CoreEscuela
         #region Métodos de Carga
         private void CargarEvaluaciones()
         {
+            var rnd = new Random();
             foreach (var curso in Escuela.Cursos)
             {
                 foreach (var asignatura in curso.Asignaturas)
                 {
                     foreach (var alumno in curso.Alumnos)
                     {
-                        var rnd = new Random(System.Environment.TickCount);
 
                         for (int i = 0; i < 5; i++)
                         {
@@ -179,7 +191,7 @@ namespace CoreEscuela
                             {
                                 Asignatura = asignatura,
                                 Nombre = $"{asignatura.Nombre} Ev#{i + 1}",
-                                Nota = (float)(5 * rnd.NextDouble()),
+                                Nota = MathF.Round(5 * (float)rnd.NextDouble(), 2),
                                 Alumno = alumno
                             };
                             alumno.Evaluaciones.Add(ev);
