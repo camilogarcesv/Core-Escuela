@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CoreEscuela.App;
 using CoreEscuela.Entidades;
 using CoreEscuela.Util;
 using static System.Console;
@@ -11,19 +12,18 @@ namespace CoreEscuela
     {
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
+            /*AppDomain.CurrentDomain.ProcessExit += AccionDelEvento;
             AppDomain.CurrentDomain.ProcessExit += (o, s)=> Printer.Beep(500,1000,1);
-            AppDomain.CurrentDomain.ProcessExit -= AccionDelEvento;
+            AppDomain.CurrentDomain.ProcessExit -= AccionDelEvento;*/
 
             var engine = new EscuelaEngine();
             engine.Inicializar();
             Printer.WriteTitle("BIENVENIDOS A LA ESCUELA");
             // Printer.Beep();
-            ImprimirCursosEscuela(engine.Escuela);
 
-            var dictmp = engine.GetDiccionarioObjetos();
-
-            engine.ImprimirDiccionario(dictmp, true);
+            var reporteador = new Reporteador(engine.GetDiccionarioObjetos());
+            var evalList =  reporteador.GetListEvaluaciones();
+            var listaAsig =  reporteador.GetListAsignaturas();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)
