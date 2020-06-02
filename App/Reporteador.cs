@@ -62,10 +62,14 @@ namespace CoreEscuela.App
             {
                 //elemento anónimo
                 var promediosAlumn = from eval in asigConEval.Value
-                            group eval by eval.Alumno.UniqueID
+                            group eval by new{
+                                eval.Alumno.UniqueID,
+                                eval.Alumno.Nombre
+                            }
                             into grupoEvalsAlumno
                             select new AlumnoPromedio{
-                                AlumnoId = grupoEvalsAlumno.Key,
+                                AlumnoId = grupoEvalsAlumno.Key.UniqueID,
+                                AlumnoNombre = grupoEvalsAlumno.Key.Nombre,
                                 Promedio = grupoEvalsAlumno.Average(evaluacion => evaluacion.Nota)
                             };
                 rta.Add(asigConEval.Key, promediosAlumn);
