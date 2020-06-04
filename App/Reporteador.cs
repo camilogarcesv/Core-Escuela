@@ -2,6 +2,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using CoreEscuela.Entidades;
+using CoreEscuela.Util;
+using static System.Console;
+
 
 namespace CoreEscuela.App
 {
@@ -25,6 +28,17 @@ namespace CoreEscuela.App
             //Escribir en el log de auditoría
         }
 
+        public void ImprimirEvaluaciones()
+        {
+            Printer.WriteTitle("Evaluaciones");
+            var lisEval = GetListEvaluaciones();
+
+            foreach (var ev in lisEval)
+            {
+                WriteLine($"Evaluación: {ev.Nombre}");
+            }
+        }
+
         public IEnumerable<string> GetListAsignaturas()
         {
             return GetListAsignaturas(out var dummy);
@@ -36,6 +50,17 @@ namespace CoreEscuela.App
 
             return (from ev in listaEvaluaciones
                     select ev.Asignatura.Nombre).Distinct();
+        }
+
+        internal void ImprimirAsignaturas()
+        {
+            Printer.WriteTitle("Asignaturas");
+            var lisAsig = GetListAsignaturas();
+
+            foreach (var asig in lisAsig)
+            {
+                WriteLine($"Asignatura: {asig}");
+            }
         }
 
         public Dictionary<string, IEnumerable<Evaluación>> GetDicEvaluacionesXAsig()
@@ -52,6 +77,24 @@ namespace CoreEscuela.App
 
             return dicRta;
         }
+
+        public void ImprimirEvaluacionesPorAsignatura()
+        {
+            Printer.WriteTitle("Evaluaciones por Asignatura");
+            var listaEvalXAsig = GetDicEvaluacionesXAsig();
+
+            foreach (var evAsig in listaEvalXAsig)
+            {
+                WriteLine($"Evaluacion por asignatura: {evAsig.Key}");
+                foreach (var item in evAsig.Value)
+                {
+                    var tmp = item as Evaluación;
+                    WriteLine(tmp.Nombre);
+                }
+            }
+        }
+
+
 
         public Dictionary<string, IEnumerable<AlumnoPromedio>> GetPromedioAlumnoPorAsignatura()
         {
@@ -80,6 +123,24 @@ namespace CoreEscuela.App
             return rta;
         }
 
+
+
+        internal void ImprimirPromedioAlumnosPorAsignatura()
+        {
+            Printer.WriteTitle("Promedio Alumnos por Asignatura");
+            var lisPromedioXAsig = GetPromedioAlumnoPorAsignatura();
+            foreach (var item in lisPromedioXAsig)
+            {
+                WriteLine($"Asignatura: {item.Key}");
+                foreach (var alum in item.Value)
+                {
+                    var tmp = alum as AlumnoPromedio;
+                    WriteLine($"Nombre {tmp.AlumnoNombre} Promedio: {tmp.Promedio}");
+                }
+            }
+        }
+
+
         public Dictionary<string, IEnumerable<AlumnoPromedio>> GetTopAlumnosXAsignatura(int top)
         {
             var rta = new Dictionary<string, IEnumerable<AlumnoPromedio>>();
@@ -93,6 +154,22 @@ namespace CoreEscuela.App
                 rta.Add(asig.Key, TopAlumnos);
             }
             return rta;
+        }
+
+        internal void ImprimirTopPromedioAlumnosPorAsignatura(int top)
+        {
+            Printer.WriteTitle("Top Promedio de Alumnos Por Asignatura");
+            var listaTopEstudiantes = GetTopAlumnosXAsignatura(top);
+
+            foreach (var topEst in listaTopEstudiantes)
+            {
+                WriteLine($"Asignatura: {topEst.Key}");
+                foreach (var item in topEst.Value)
+                {
+                    var tmp = item as AlumnoPromedio;
+                    WriteLine($"Nombre {tmp.AlumnoNombre} Promedio: {tmp.Promedio}");
+                }
+            }
         }
     }
 }

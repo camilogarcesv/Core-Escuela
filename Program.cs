@@ -19,63 +19,75 @@ namespace CoreEscuela
             var engine = new EscuelaEngine();
             engine.Inicializar();
             Printer.WriteTitle("BIENVENIDOS A LA ESCUELA");
-            // Printer.Beep();
 
             var reporteador = new Reporteador(engine.GetDiccionarioObjetos());
             var evalList = reporteador.GetListEvaluaciones();
             var listaAsig = reporteador.GetListAsignaturas();
             var listaEvalXAsig = reporteador.GetDicEvaluacionesXAsig();
+            var promedioXAsig = reporteador.GetPromedioAlumnoPorAsignatura();
+            var topEstudiantes = reporteador.GetTopAlumnosXAsignatura(5);
 
-            Printer.WriteTitle("Captura de una Evaluación por Consola");
-            var newEval = new Evaluación();
-            string nombre, notaString;
-            float nota;
+            // Reto menu consola
+            ConsoleKeyInfo opcion;
+            // opcion = Console.ReadKey();
+            do
+            {
+                Console.Clear();
+                Printer.WriteTitle("BIENVENIDO AL PROGRAMA ESCUELA");
+                WriteLine(engine.Escuela);
+                WriteLine("1 - Lista de cursos.");
+                WriteLine("2 - Reporte de evaluaciones");
+                WriteLine("3 - Reporte de asignaturas.");
+                WriteLine("4 - Reporte de evaluaciones por asignatura.");
+                WriteLine("5 - Reporte del promedio de alumnos por asignatura.");
+                WriteLine("6 - Reporte Top X Estudiantes por asignatura.");
+                WriteLine("Presione ENTER o ESC para salir");
 
-            WriteLine("Ingrese el nombre de la evaluación");
-            Printer.PresioneENTER();
-            nombre = Console.ReadLine();
-            // nota = Convert.ToInt32(Console.ReadLine());
-            if (string.IsNullOrWhiteSpace(nombre))
-            {
-                Printer.WriteTitle("El valor del nombre no puede ser vacío");
-                WriteLine("Saliendo del programa");
-            }
-            else
-            {
-                newEval.Nombre = nombre.ToLower();
-                WriteLine("El nombre de la evaluación ha sido ingresado correctamente");
-            }
+                opcion = ReadKey();
+                Console.Clear();
+                switch (opcion.Key)
+                {
+                    case ConsoleKey.D1:
+                        ImprimirCursosEscuela(engine.Escuela);
+                        presioneCualquierTecla();
+                        break;
+                    case ConsoleKey.D2:
+                        reporteador.ImprimirEvaluaciones();
+                        presioneCualquierTecla();
+                        break;
+                    case ConsoleKey.D3:
+                        reporteador.ImprimirAsignaturas();
+                        presioneCualquierTecla();
+                        break;
+                    case ConsoleKey.D4:
+                        reporteador.ImprimirEvaluacionesPorAsignatura();
+                        presioneCualquierTecla();
+                        break;
+                    case ConsoleKey.D5:
+                        reporteador.ImprimirPromedioAlumnosPorAsignatura();
+                        presioneCualquierTecla();
+                        break;
+                    case ConsoleKey.D6:
+                        int top;
+                        string cadenaTop;
 
-            WriteLine("Ingrese la nota de la evaluación");
-            Printer.PresioneENTER();
-            notaString = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(notaString))
-            {
-                Printer.WriteTitle("El valor de la nota no puede ser vacío");
-                WriteLine("Saliendo del programa");
-            }
-            else
-            {
-                try
-                {
-                    newEval.Nota = float.Parse(notaString);
-                    if (newEval.Nota < 0 || newEval.Nota > 5)
-                    {
-                        throw new ArgumentOutOfRangeException("La nota debe estar entre 0 y 5");
-                    }
-                    WriteLine("La nota de la evaluación ha sido ingresada correctamente");
+                        Write("\nDigite la cantidad de estudiantes, luego ENTER: ");
+                        cadenaTop = ReadLine();
+                        top = int.Parse(cadenaTop);
+                        reporteador.ImprimirTopPromedioAlumnosPorAsignatura(top);
+                        presioneCualquierTecla();
+                        break;
                 }
-                catch (ArgumentOutOfRangeException arge)
-                {
-                    Printer.WriteTitle(arge.Message);
-                    WriteLine("Saliendo del programa");
-                }
-                catch (Exception)
-                {
-                    Printer.WriteTitle("El valor de la nota no puede ser vacío");
-                    WriteLine("Saliendo del programa");
-                }
-            }
+                
+            } while (opcion.Key != ConsoleKey.Escape && opcion.Key != ConsoleKey.Enter);
+
+        }
+
+        private static void presioneCualquierTecla()
+        {
+            System.Console.WriteLine("\n------ Presione cualquier tecla -------");
+            System.Console.WriteLine("         para regresar al Menu");
+            Console.ReadKey();
         }
 
         private static void AccionDelEvento(object sender, EventArgs e)
